@@ -69,3 +69,9 @@ run_config = ScriptRunConfig(
 
 # Submit our configured run under our experiment
 run = exp.submit(run_config)
+
+# Wait for the run to finish
+run.wait_for_completion(show_output=True)
+
+# Delete our compute target so it doesn't cost us money
+compute_target.delete()
