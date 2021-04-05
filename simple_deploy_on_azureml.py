@@ -10,7 +10,7 @@ from azureml.core.workspace import Workspace
 if __name__ == '__main__':
     config_filepath = './config.json'
     experiment_name = 'simple-example'
-    run_id = 'simple-example_1617608339_ddff007b'
+    run_id = 'simple-example_1617611755_3a19c02d'
     model_artifact_path = 'logs/message.txt'
     requirements_file = 'requirements.txt'
     score_file = 'simple_deploy/score.py'
