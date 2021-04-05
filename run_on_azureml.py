@@ -39,7 +39,7 @@ workspace_config = 'config.json'
 requirements_file = 'requirements.txt'
 compute_target_name = 'my-compute'
 experiment_name = 'simple-example'
-script_path = 'simple/run.py'
+script_path = 'simple_run/run.py'
 script_args = ['--message', 'Howdy!']
 
 
