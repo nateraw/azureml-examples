@@ -1,0 +1,7 @@
+azureml-defaults
+mlflow
+azureml-mlflow
+torch
+torchvision
+pytorch-lightning
+cmake
