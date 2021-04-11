@@ -25,7 +25,7 @@ def parse_args(args=None):
 
 
 def main(args):
-    request_data = json.dumps({"data": "blah"})
+    request_data = json.dumps({"data": "blah"}) # if args.request_data is None else args.request_data
 
     if args.endpoint is not None:
         response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
