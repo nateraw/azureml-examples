@@ -1,0 +1,35 @@
+name: CI testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  pytest:
+    runs-on: ubuntu-18.04
+  
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt --quiet
+          pip install -r tests/requirements.txt --quiet
+          python --version
+          pip --version
+          pip list
+        shell: bash
+
+      - name: Tests
+        run: |
+          python -m pytest -v

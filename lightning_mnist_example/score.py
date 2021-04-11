@@ -7,17 +7,21 @@ from pathlib import Path
 import requests
 import torch
 import torch.nn.functional as F
-from model import Classifier
 from PIL import Image
 from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
+
+try:
+    from model import Classifier
+except:
+    from .model import Classifier
 
 
 def init():
     global model, transform
     transform = ToTensor()
     model_dir = Path(os.getenv("AZUREML_MODEL_DIR", "logs/"))
-    model_ckpt_filepath = model_dir / "model.ckpt"
+    model_ckpt_filepath = list(model_dir.glob('**/*.ckpt'))[0]
     model = Classifier.load_from_checkpoint(str(model_ckpt_filepath))
     model.freeze()
 

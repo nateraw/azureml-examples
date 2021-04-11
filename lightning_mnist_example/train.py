@@ -1,10 +1,14 @@
 from argparse import ArgumentParser
 
 import pytorch_lightning as pl
-from model import Classifier
 from torch.utils.data import DataLoader, random_split
 from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
+
+try:
+    from model import Classifier
+except:
+    from .model import Classifier
 
 
 def parse_args(args=None):
