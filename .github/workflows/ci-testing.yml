@@ -22,8 +22,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install -r requirements.txt --quiet --use-feature=2020-resolver
-          pip install pytest --quiet --use-feature=2020-resolver
+          pip install --upgrade pip
+          pip install -r requirements.txt --quiet
+          pip install -r tests/requirements.txt --quiet
           python --version
           pip --version
           pip list
