@@ -66,3 +66,4 @@ def main():
 
 if __name__ == '__main__':
     response_data = main()
+    print(response_data)

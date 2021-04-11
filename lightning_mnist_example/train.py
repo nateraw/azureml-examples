@@ -1,55 +1,49 @@
+from argparse import ArgumentParser
+
 import pytorch_lightning as pl
-import torch
-from torch import nn
+from model import Classifier
+from torch.utils.data import DataLoader, random_split
+from torchvision.datasets import MNIST
+from torchvision.transforms import ToTensor
 
 
-class Classifier(pl.LightningModule):
-
-    def __init__(self, c, h, w, num_classes=10, hidden_dim=64, lr=0.0001):
-        super().__init__()
-        self.save_hyperparameters()
-        self.model = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(self.hparams.c * self.hparams.h * self.hparams.w, self.hparams.hidden_dim),
-            nn.ReLU(),
-            nn.Linear(self.hparams.hidden_dim, self.hparams.num_classes),
-        )
-        self.criterion = nn.CrossEntropyLoss()
-        self.accuracy_metric = pl.metrics.Accuracy()
-
-    def forward(self, x):
-        return self.model(x)
-
-    def shared_step(self, batch, split="train"):
-        x, y = batch
-        outputs = self(x)
-        loss = self.criterion(outputs, y)
-        self.log(f"{split}_loss", loss)
-
-        if split in ["val", "test"]:
-            preds = outputs.argmax(dim=1)
-            acc = self.accuracy_metric(preds, y)
-            self.log(f"{split}_acc", acc, prog_bar=True)
-
-        return loss
-
-    def training_step(self, batch, batch_idx):
-        return self.shared_step(batch, "train")
-
-    def validation_step(self, batch, batch_idx):
-        return self.shared_step(batch, "val")
-
-    def test_step(self, batch, batch_idx):
-        return self.shared_step(batch, "test")
-
-    def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=self.hparams.lr)
+def parse_args(args=None):
+    parser = ArgumentParser()
+    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--num_workers", type=int, default=0)
+    parser.add_argument("--hidden_dim", type=int, default=64)
+    parser.add_argument("--data_dir", type=str, default="./")
+    parser.add_argument("--lr", type=float, default=1e-3)
+    parser = pl.Trainer.add_argparse_args(parser)
+    return parser.parse_args(args)
 
 
-if __name__ == '__main__':
-    b, c, h, w = 4, 1, 28, 28
-    num_classes = 10
-    x = torch.rand(b, c, h, w)
-    model = Classifier(c, h, w, num_classes=num_classes)
-    out = model(x)
-    assert out.shape == (b, num_classes)
+def main(args):
+    pl.seed_everything(1234)
+
+    # Prepare MNIST Dataset + DataLoaders
+    mnist_dataset = MNIST(args.data_dir, train=True, download=True, transform=ToTensor())
+    mnist_test = MNIST(args.data_dir, train=False, download=True, transform=ToTensor())
+    mnist_train, mnist_val = random_split(mnist_dataset, [55000, 5000])
+    train_loader = DataLoader(mnist_train, batch_size=args.batch_size, num_workers=args.num_workers)
+    val_loader = DataLoader(mnist_val, batch_size=args.batch_size, num_workers=args.num_workers)
+    test_loader = DataLoader(mnist_test, batch_size=args.batch_size, num_workers=args.num_workers)
+
+    # Initialize Model
+    model = Classifier(1, 28, 28, lr=args.lr, hidden_dim=args.hidden_dim)
+
+    # Initialize Trainer
+    trainer = pl.Trainer.from_argparse_args(args)
+
+    # Train Model
+    trainer.fit(model, train_loader, val_loader)
+
+    # Test Model
+    trainer.test(test_dataloaders=test_loader)
+
+    return model, trainer
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    model, trainer = main(args)

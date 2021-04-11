@@ -48,30 +48,24 @@ def run(input_data):
     return {"predictions": pred.tolist(), "proba": proba.tolist()}
 
 
-def get_example_data(num_examples=10):
-
-    ds = MNIST("./", download=True, train=False)
-
-    images_as_bytes = []
-    labels = []
-    for i in range(num_examples):
-        im, label = ds[i]
-        images_as_bytes.append(image_to_bytestr(im))
-        labels.append(label)
-
-    return json.dumps({"images": images_as_bytes}), labels
+def get_example_data():
+    img_filepaths = ['images/6.png', 'images/7.png']
+    image_bytes = []
+    for img_filepath in img_filepaths:
+        im = Image.open(img_filepath)
+        image_bytes.append(image_to_bytestr(im))
+    return json.dumps({'images': image_bytes})
 
 
 def parse_args(args=None):
     parser = ArgumentParser()
     parser.add_argument("--endpoint", type=str, default=None)
-    parser.add_argument("--num_examples", type=int, default=5)
     return parser.parse_args(args)
 
 
 def main(args):
 
-    request_data, labels = get_example_data(args.num_examples)
+    request_data = get_example_data()
 
     if args.endpoint is not None:
         response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
@@ -80,7 +74,7 @@ def main(args):
         response_data = run(request_data)
 
     print(f"{'Predicted':10s}", response_data["predictions"])
-    print(f"{'Actual':10s}", labels)
+
     return response_data
 
 
