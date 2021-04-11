@@ -4,7 +4,6 @@ from torch import nn
 
 
 class Classifier(pl.LightningModule):
-
     def __init__(self, c, h, w, num_classes=10, hidden_dim=64, lr=0.0001):
         super().__init__()
         self.save_hyperparameters()
@@ -46,7 +45,7 @@ class Classifier(pl.LightningModule):
         return torch.optim.Adam(self.parameters(), lr=self.hparams.lr)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     b, c, h, w = 4, 1, 28, 28
     num_classes = 10
     x = torch.rand(b, c, h, w)

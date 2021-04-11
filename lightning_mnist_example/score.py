@@ -49,12 +49,12 @@ def run(input_data):
 
 
 def get_example_data():
-    img_filepaths = ['images/6.png', 'images/7.png']
+    img_filepaths = ["images/6.png", "images/7.png"]
     image_bytes = []
     for img_filepath in img_filepaths:
         im = Image.open(img_filepath)
         image_bytes.append(image_to_bytestr(im))
-    return json.dumps({'images': image_bytes})
+    return json.dumps({"images": image_bytes})
 
 
 def parse_args(args=None):
