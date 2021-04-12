@@ -4,5 +4,5 @@ azureml-mlflow
 torch
 torchvision
 pytorch-lightning
-tensorflow-gpu==2.0.0
+tensorflow-gpu
 cmake
