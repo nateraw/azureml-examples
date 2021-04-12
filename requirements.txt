@@ -1,8 +1,4 @@
-azureml-defaults
-mlflow
-azureml-mlflow
 torch
 torchvision
 pytorch-lightning
 tensorflow-gpu
-cmake
