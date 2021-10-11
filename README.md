@@ -1,7 +1,7 @@
 # Azure Machine Learning Examples
 
 
-# Blogposts (WIP 👷🏻 ):
+# Blogposts:
 
   - [Create Your First Azure ML Workspace](https://nateraw.com/2021/04/azureml-create/)
   - [Running Your First Python Script on Azure ML](https://nateraw.com/2021/04/azureml-basic/)
