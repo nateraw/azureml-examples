@@ -1,12 +1,12 @@
 import json
 import os
-import requests
 from argparse import ArgumentParser
 from base64 import b64decode, b64encode
 from pathlib import Path
-from PIL import Image
 
 import numpy as np
+import requests
+from PIL import Image
 from tensorflow import keras
 
 

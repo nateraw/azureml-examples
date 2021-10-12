@@ -1,6 +1,6 @@
-import json
-import pytest
 from pathlib import Path
+
+import pytest
 
 from keras_mnist_example import score, train
 

@@ -8,7 +8,6 @@ import requests
 import torch
 import torch.nn.functional as F
 from PIL import Image
-from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
 
 try:

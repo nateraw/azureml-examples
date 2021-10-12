@@ -1,9 +1,9 @@
 import json
 import os
+from pathlib import Path
 
 import fire
 import requests
-from pathlib import Path
 
 
 def init():

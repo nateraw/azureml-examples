@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+
 import pytest
 
 from simple_example import score, run
