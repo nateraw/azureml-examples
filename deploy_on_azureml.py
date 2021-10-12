@@ -18,7 +18,6 @@ def main(
         model_name: str = "test-keras-model",
         service_name: str = "test-keras-service",
 ):
-
     # Init workspace object from azureml workspace resource you've created
     ws = Workspace.from_config(workspace_config)
 

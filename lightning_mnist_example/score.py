@@ -67,7 +67,6 @@ def parse_args(args=None):
 
 
 def main(args):
-
     request_data = get_example_data()
 
     if args.endpoint is not None:

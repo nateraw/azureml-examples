@@ -20,7 +20,7 @@ def run(input_data):
 
 
 def main(endpoint: str = None):
-    request_data = json.dumps({"data": "blah"}) # if args.request_data is None else args.request_data
+    request_data = json.dumps({"data": "blah"})  # if args.request_data is None else args.request_data
 
     if endpoint is not None:
         response_data = requests.post(endpoint, request_data, headers={"Content-Type": "application/json"}).json()

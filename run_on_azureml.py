@@ -11,13 +11,13 @@ from azureml.core.compute import AmlCompute, ComputeTarget
 
 
 def find_or_create_compute_target(
-    workspace,
-    name,
-    instance_type="Standard_D8_v3",
-    min_nodes=0,
-    max_nodes=10,
-    idle_seconds_before_scaledown=900,
-    vm_priority="lowpriority",
+        workspace,
+        name,
+        instance_type="Standard_D8_v3",
+        min_nodes=0,
+        max_nodes=10,
+        idle_seconds_before_scaledown=900,
+        vm_priority="lowpriority",
 ):
     if name in workspace.compute_targets:
         return ComputeTarget(workspace=workspace, name=name)
