@@ -32,9 +32,7 @@ def main(args):
     run = Run(experiment, args.run_id)
 
     # Register your best run's model
-    model = run.register_model(
-        model_name=args.model_name, model_path=args.model_artifact_path
-    )
+    model = run.register_model(model_name=args.model_name, model_path=args.model_artifact_path)
 
     # Create an environment based on requirements
     env = Environment.from_pip_requirements("my-pip-env", args.requirements_file)

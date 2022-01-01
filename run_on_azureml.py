@@ -1,12 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
 
-from azureml.core import (
-    Environment,
-    Experiment,
-    ScriptRunConfig,
-    Workspace,
-)
+from azureml.core import Environment, Experiment, ScriptRunConfig, Workspace
 from azureml.core.compute import AmlCompute, ComputeTarget
 
 

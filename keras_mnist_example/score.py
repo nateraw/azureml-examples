@@ -56,9 +56,7 @@ def main():
     request_data = get_example_data()
 
     if args.endpoint is not None:
-        response_data = requests.post(
-            args.endpoint, request_data, headers={"Content-Type": "application/json"}
-        ).json()
+        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
     else:
         init()
         response_data = run(request_data)
