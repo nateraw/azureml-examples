@@ -7,7 +7,7 @@
 
 # @pytest.mark.usefixtures('rm_logdir')
 # def test_local_run():
-#     args = train.parse_args('--max_epochs 1 --default_root_dir logs/'.split())
+#     args = train.parse_args('--max_epochs 1 --default_root_dir logs/ --batch_size 8'.split())
 #     train.main(args)
 #     assert 1 == 1
 
