@@ -1,18 +1,25 @@
 import json
+import sys
 from pathlib import Path
+from unittest.mock import patch
 
+import fire
 import pytest
 
 from simple_example import score, run
 
 
 @pytest.mark.parametrize(
-    "message,expected", [('Yo!!', 'Yo!!'), (None, 'Hello, world!')]
+    "message,expected", [(None, 'Hello, world!'), ('Yo!!', 'Yo!!')]
 )
 @pytest.mark.usefixtures('rm_logdir')
 def test_local_run(message, expected):
-    args = run.parse_args(f'--message {message}'.split() if message is not None else '')
-    run.main(args)
+    args = [".py"]
+    if message:
+        args += [message]
+    with patch.object(sys, 'argv', args):
+        fire.Fire(run.main)
+
     assert Path('logs/message.txt').read_text() == expected
 
     score.init()
