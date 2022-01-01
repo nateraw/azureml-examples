@@ -6,6 +6,6 @@ import pytest
 
 @pytest.fixture()
 def rm_logdir():
-    if Path('logs/').exists():
-        rmtree('logs/')
+    if Path("logs/").exists():
+        rmtree("logs/")
     print("Removing Logdir")

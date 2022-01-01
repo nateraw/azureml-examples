@@ -8,12 +8,11 @@ import requests
 import torch
 import torch.nn.functional as F
 from PIL import Image
-from torchvision.datasets import MNIST
 from torchvision.transforms import ToTensor
 
 try:
     from model import Classifier
-except:
+except ImportError:
     from .model import Classifier
 
 
@@ -21,7 +20,7 @@ def init():
     global model, transform
     transform = ToTensor()
     model_dir = Path(os.getenv("AZUREML_MODEL_DIR", "logs/"))
-    model_ckpt_filepath = list(model_dir.glob('**/*.ckpt'))[0]
+    model_ckpt_filepath = list(model_dir.glob("**/*.ckpt"))[0]
     model = Classifier.load_from_checkpoint(str(model_ckpt_filepath))
     model.freeze()
 
@@ -72,7 +71,9 @@ def main(args):
     request_data = get_example_data()
 
     if args.endpoint is not None:
-        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
+        response_data = requests.post(
+            args.endpoint, request_data, headers={"Content-Type": "application/json"}
+        ).json()
     else:
         init()
         response_data = run(request_data)

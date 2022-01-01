@@ -17,8 +17,13 @@ def parse_args(args=None):
 def main(args):
     data_dir = Path(args.data_dir).absolute()
     data_dir.mkdir(parents=True, exist_ok=True)
-    (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data(data_dir / "mnist.npz")
-    train_data, test_data = (x_train.astype("float32") / 255, y_train), (x_test.astype("float32") / 255, y_test)
+    (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data(
+        data_dir / "mnist.npz"
+    )
+    train_data, test_data = (x_train.astype("float32") / 255, y_train), (
+        x_test.astype("float32") / 255,
+        y_test,
+    )
 
     model = keras.models.Sequential(
         [
@@ -32,7 +37,7 @@ def main(args):
         loss="sparse_categorical_crossentropy",
         metrics=["sparse_categorical_accuracy"],
     )
-    history = model.fit(
+    _ = model.fit(
         *train_data,
         batch_size=args.batch_size,
         epochs=args.max_epochs,

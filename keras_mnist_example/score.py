@@ -1,12 +1,12 @@
 import json
 import os
-import requests
 from argparse import ArgumentParser
 from base64 import b64decode, b64encode
 from pathlib import Path
-from PIL import Image
 
 import numpy as np
+import requests
+from PIL import Image
 from tensorflow import keras
 
 
@@ -56,7 +56,9 @@ def main():
     request_data = get_example_data()
 
     if args.endpoint is not None:
-        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
+        response_data = requests.post(
+            args.endpoint, request_data, headers={"Content-Type": "application/json"}
+        ).json()
     else:
         init()
         response_data = run(request_data)

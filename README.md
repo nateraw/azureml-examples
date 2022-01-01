@@ -62,7 +62,7 @@ python deploy_on_azureml.py \
   --model_artifact_path logs/saved_model \
   --score_file keras_mnist_example/score.py \
   --model_name test-keras-model \
-  --service_name test-keras-service 
+  --service_name test-keras-service
 ```
 
 ### Predict from Endpoint

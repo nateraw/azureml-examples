@@ -47,3 +47,4 @@ repos:
     hooks:
       - id: flake8
         name: PEP8
+        args: ["--max-line-length=120"]

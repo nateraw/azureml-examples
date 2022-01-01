@@ -7,7 +7,7 @@ from torchvision.transforms import ToTensor
 
 try:
     from model import Classifier
-except:
+except ImportError:
     from .model import Classifier
 
 
@@ -26,12 +26,20 @@ def main(args):
     pl.seed_everything(1234)
 
     # Prepare MNIST Dataset + DataLoaders
-    mnist_dataset = MNIST(args.data_dir, train=True, download=True, transform=ToTensor())
+    mnist_dataset = MNIST(
+        args.data_dir, train=True, download=True, transform=ToTensor()
+    )
     mnist_test = MNIST(args.data_dir, train=False, download=True, transform=ToTensor())
     mnist_train, mnist_val = random_split(mnist_dataset, [55000, 5000])
-    train_loader = DataLoader(mnist_train, batch_size=args.batch_size, num_workers=args.num_workers)
-    val_loader = DataLoader(mnist_val, batch_size=args.batch_size, num_workers=args.num_workers)
-    test_loader = DataLoader(mnist_test, batch_size=args.batch_size, num_workers=args.num_workers)
+    train_loader = DataLoader(
+        mnist_train, batch_size=args.batch_size, num_workers=args.num_workers
+    )
+    val_loader = DataLoader(
+        mnist_val, batch_size=args.batch_size, num_workers=args.num_workers
+    )
+    test_loader = DataLoader(
+        mnist_test, batch_size=args.batch_size, num_workers=args.num_workers
+    )
 
     # Initialize Model
     model = Classifier(1, 28, 28, lr=args.lr, hidden_dim=args.hidden_dim)
