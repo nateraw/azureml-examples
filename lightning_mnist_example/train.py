@@ -10,7 +10,7 @@ except:
     from .model import Classifier
 
 
-def main(batch_size: int = 32, num_workers: int = 0, hidden_dim: int = 64, data_dir: str = "./", lr: float = 1e-3):
+def main(batch_size: int = 32, num_workers: int = 0, hidden_dim: int = 64, data_dir: str = "./", lr: float = 1e-3, **kwargs):
     pl.seed_everything(1234)
 
     # Prepare MNIST Dataset + DataLoaders
@@ -25,7 +25,7 @@ def main(batch_size: int = 32, num_workers: int = 0, hidden_dim: int = 64, data_
     model = Classifier(1, 28, 28, lr=lr, hidden_dim=hidden_dim)
 
     # Initialize Trainer
-    trainer = pl.Trainer.from_argparse_args()
+    trainer = pl.Trainer(**kwargs)
 
     # Train Model
     trainer.fit(model, train_loader, val_loader)
