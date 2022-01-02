@@ -1,3 +1,4 @@
+import itertools
 from pathlib import Path
 
 import fire
@@ -47,10 +48,11 @@ def main(
     exp = Experiment(ws, experiment_name)
     target = find_or_create_compute_target(ws, compute_target_name)
     env = Environment.from_pip_requirements("my-pip-env", requirements_file)
+    args = list(itertools.chain(*[(f"--{n}", f"{v}") for n, v in kwargs.items()]))
     run_config = ScriptRunConfig(
         source_directory=Path(script_path).parent,
         script=Path(script_path).name,
-        arguments=kwargs,
+        arguments=args,
         compute_target=target,
         environment=env,
     )
