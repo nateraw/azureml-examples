@@ -1,12 +1,12 @@
 import json
 import os
-import requests
-from argparse import ArgumentParser
 from base64 import b64decode, b64encode
 from pathlib import Path
-from PIL import Image
 
+import fire
 import numpy as np
+import requests
+from PIL import Image
 from tensorflow import keras
 
 
@@ -48,22 +48,18 @@ def get_example_data():
     return json.dumps({"images": image_bytes})
 
 
-def main():
-    parser = ArgumentParser()
-    parser.add_argument("--endpoint", type=str, default=None)
-    args = parser.parse_args()
-
+def main(endpoint: str = None):
     request_data = get_example_data()
 
-    if args.endpoint is not None:
-        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
+    if endpoint is not None:
+        response_data = requests.post(endpoint, request_data, headers={"Content-Type": "application/json"}).json()
     else:
         init()
         response_data = run(request_data)
 
+    print(response_data)
     return response_data
 
 
 if __name__ == "__main__":
-    response_data = main()
-    print(response_data)
+    fire.Fire(main)
