@@ -1,9 +1,9 @@
 import json
 import os
-from argparse import ArgumentParser
 from base64 import b64decode, b64encode
 from pathlib import Path
 
+import fire
 import requests
 import torch
 import torch.nn.functional as F
@@ -60,18 +60,11 @@ def get_example_data():
     return json.dumps({"images": image_bytes})
 
 
-def parse_args(args=None):
-    parser = ArgumentParser()
-    parser.add_argument("--endpoint", type=str, default=None)
-    return parser.parse_args(args)
-
-
-def main(args):
-
+def main(endpoint: str = None):
     request_data = get_example_data()
 
-    if args.endpoint is not None:
-        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
+    if endpoint is not None:
+        response_data = requests.post(endpoint, request_data, headers={"Content-Type": "application/json"}).json()
     else:
         init()
         response_data = run(request_data)
@@ -82,5 +75,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    args = parse_args()
-    response_data = main(args)
+    fire.Fire(main)

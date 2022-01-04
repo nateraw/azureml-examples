@@ -1,11 +1,9 @@
 # Azure Machine Learning Examples
 
-
 # Blogposts:
 
-  - [Create Your First Azure ML Workspace](https://nateraw.com/2021/04/azureml-create/)
-  - [Running Your First Python Script on Azure ML](https://nateraw.com/2021/04/azureml-basic/)
-
+- [Create Your First Azure ML Workspace](https://nateraw.com/2021/04/azureml-create/)
+- [Running Your First Python Script on Azure ML](https://nateraw.com/2021/04/azureml-basic/)
 
 # Examples
 
@@ -52,8 +50,9 @@ python run_on_azureml.py \
 
 ### Deploy
 
-In the Azure ML Portal, navigate to the run you're happy with, and copy its Run ID. Note this is not just an int like "Run 5", but a longer unique identifier. Pass this to the `--run_id` flag of `deploy_on_azure.py`. Your Run ID should look similar to the one below, but will not be the same.
-
+In the Azure ML Portal, navigate to the run you're happy with, and copy its Run ID. Note this is not just an int like "
+Run 5", but a longer unique identifier. Pass this to the `--run_id` flag of `deploy_on_azure.py`. Your Run ID should
+look similar to the one below, but will not be the same.
 
 ```
 python deploy_on_azureml.py \
@@ -70,7 +69,6 @@ python deploy_on_azureml.py \
 ```
 python keras_mnist_example/score.py --endpoint <YOUR ENDPOINT>
 ```
-
 
 ## PyTorch Lightning Example
 

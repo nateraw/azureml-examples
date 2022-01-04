@@ -1,8 +1,8 @@
 import json
 import os
-from argparse import ArgumentParser
 from pathlib import Path
 
+import fire
 import requests
 
 
@@ -19,17 +19,11 @@ def run(input_data):
     return {"message": message, "input_data": input_data}
 
 
-def parse_args(args=None):
-    parser = ArgumentParser()
-    parser.add_argument("--endpoint", type=str, default=None)
-    return parser.parse_args(args)
-
-
-def main(args):
+def main(endpoint: str = None):
     request_data = json.dumps({"data": "blah"})  # if args.request_data is None else args.request_data
 
-    if args.endpoint is not None:
-        response_data = requests.post(args.endpoint, request_data, headers={"Content-Type": "application/json"}).json()
+    if endpoint is not None:
+        response_data = requests.post(endpoint, request_data, headers={"Content-Type": "application/json"}).json()
     else:
         init()
         response_data = run(request_data)
@@ -39,4 +33,4 @@ def main(args):
 
 
 if __name__ == "__main__":
-    main(parse_args())
+    fire.Fire(main)
