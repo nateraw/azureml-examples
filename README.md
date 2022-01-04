@@ -1,5 +1,8 @@
 # Azure Machine Learning Examples
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/nateraw/azureml-examples/main.svg)](https://results.pre-commit.ci/latest/github/nateraw/azureml-examples/main)
+[![CI testing](https://github.com/nateraw/azureml-examples/actions/workflows/ci-testing.yml/badge.svg?event=push)](https://github.com/nateraw/azureml-examples/actions/workflows/ci-testing.yml)
+
 # Blogposts:
 
 - [Create Your First Azure ML Workspace](https://nateraw.com/2021/04/azureml-create/)
