@@ -9,7 +9,10 @@ class Classifier(pl.LightningModule):
         self.save_hyperparameters()
         self.model = nn.Sequential(
             nn.Flatten(),
-            nn.Linear(self.hparams.c * self.hparams.h * self.hparams.w, self.hparams.hidden_dim),
+            nn.Linear(
+                self.hparams.c * self.hparams.h * self.hparams.w,
+                self.hparams.hidden_dim,
+            ),
             nn.ReLU(),
             nn.Linear(self.hparams.hidden_dim, self.hparams.num_classes),
         )

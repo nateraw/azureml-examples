@@ -8,7 +8,10 @@ def main(lr: float = 1e-3, batch_size: int = 32, max_epochs: int = 5, data_dir: 
     data_dir = Path(data_dir).absolute()
     data_dir.mkdir(parents=True, exist_ok=True)
     (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data(data_dir / "mnist.npz")
-    train_data, test_data = (x_train.astype("float32") / 255, y_train), (x_test.astype("float32") / 255, y_test)
+    train_data, test_data = (x_train.astype("float32") / 255, y_train), (
+        x_test.astype("float32") / 255,
+        y_test,
+    )
 
     model = keras.models.Sequential(
         [

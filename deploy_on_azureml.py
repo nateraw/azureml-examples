@@ -9,14 +9,14 @@ from azureml.core.workspace import Workspace
 
 
 def main(
-        workspace_config: str = "config.json",
-        requirements_file: str = "requirements.txt",
-        experiment_name: str = "test-exp",
-        run_id: str = None,
-        model_artifact_path: str = "logs/saved_model",
-        score_file: str = "keras_example/score.py",
-        model_name: str = "test-keras-model",
-        service_name: str = "test-keras-service",
+    workspace_config: str = "config.json",
+    requirements_file: str = "requirements.txt",
+    experiment_name: str = "test-exp",
+    run_id: str = None,
+    model_artifact_path: str = "logs/saved_model",
+    score_file: str = "keras_example/score.py",
+    model_name: str = "test-keras-model",
+    service_name: str = "test-keras-service",
 ):
     # Init workspace object from azureml workspace resource you've created
     ws = Workspace.from_config(workspace_config)

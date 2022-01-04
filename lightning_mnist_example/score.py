@@ -12,7 +12,7 @@ from torchvision.transforms import ToTensor
 
 try:
     from model import Classifier
-except:
+except ImportError:
     from .model import Classifier
 
 
@@ -20,7 +20,7 @@ def init():
     global model, transform
     transform = ToTensor()
     model_dir = Path(os.getenv("AZUREML_MODEL_DIR", "logs/"))
-    model_ckpt_filepath = list(model_dir.glob('**/*.ckpt'))[0]
+    model_ckpt_filepath = list(model_dir.glob("**/*.ckpt"))[0]
     model = Classifier.load_from_checkpoint(str(model_ckpt_filepath))
     model.freeze()
 

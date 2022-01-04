@@ -6,11 +6,13 @@ from torchvision.transforms import ToTensor
 
 try:
     from model import Classifier
-except:
+except ImportError:
     from .model import Classifier
 
 
-def main(batch_size: int = 32, num_workers: int = 0, hidden_dim: int = 64, data_dir: str = "./", lr: float = 1e-3, **kwargs):
+def main(
+    batch_size: int = 32, num_workers: int = 0, hidden_dim: int = 64, data_dir: str = "./", lr: float = 1e-3, **kwargs
+):
     pl.seed_everything(1234)
 
     # Prepare MNIST Dataset + DataLoaders
